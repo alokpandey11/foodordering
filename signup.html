@@ -182,9 +182,9 @@
         <div class="row">
           <div class="col-md-12 col-lg-8 inpbox">
             <form id="registration_form">
-              <div class="form-group" id="sform">
+              <div class="form-group">
                 <label for="name">Name</label>
-                <input type="text" class="form-control" id="name" aria-describedby=" " placeholder="Enter Name" required>
+                <input type="text" class="form-control" id="fname" aria-describedby=" " placeholder="Enter Name" required>
                 <span class="error_form" id="fname_error_message"></span>
               </div>
               <div class="form-group">
@@ -194,8 +194,9 @@
               </div>
               <div class="form-group">
                 <label for="mobile">Mobile</label>
-                <input type="tel" class="form-control" id="phone" name="phone" pattern="[0-9]{3}-[0-9]{2}-[0-9]{3}" placeholder="Enter Mobile no">
+                <input type="tel" class="form-control" id="mobile" name="phone" placeholder="Enter Mobile no">
                 <span class="error_form" id="mobile_error_message"></span>
+                <div id="abcd"> </div>
               </div>
               <div class="form-group">
                 <label for="pwd">Password</label>
@@ -207,7 +208,7 @@
                 <input type="password" class="form-control" id="cpwd" placeholder="Password">
               </div>
               <div id="showErrorpwd"> </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              <button type="submit" class="btn btn-primary" value="Register">Submit</button>
             </form>   
           </div>
         </div>
@@ -376,109 +377,137 @@
       $('#cpwd').keyup(function(){
         var pwd = $('#pwd').val();
         var cpwd = $('#cpwd').val();
-        console.log('var');
+        
     
         if(cpwd!=pwd){
           $('#showErrorpwd').html("**password is not matching");
           $('#showErrorpwd').css('color','red');
+          $("#pwd").css("border-bottom","2px solid #F90A0A");
+          $("#cpwd").css("border-bottom","2px solid #F90A0A");
           return false;
+        }
           else{
           $('#showErrorpwd').html(" ");
+          $("#pwd").css("border-bottom","2px solid #34F458");
+          $("#cpwd").css("border-bottom","2px solid #34F458");
           return true;
         }
       });
+
+
+      $('#mobile').keyup(function(){
+        var mobile = $('#mobile').val();
+        if(mobile.length!=10){
+          $('#abcd').html("Please Enter 10 digit of Mobile no");
+          $('#abcd').css('color','red');
+          $("#mobile").css("border-bottom","2px solid #F90A0A");
+          return false;
+        }
+          else{
+          $('#abcd').html(" ");
+          $("#mobile").css("border-bottom","2px solid #34F458");
+          return true;
+        }
+      });
+
+
+
+
+
+
+
+
+
+
+
       $(function() {
+
+                $("#fname_error_message").hide();
+                $("#email_error_message").hide();
+
+                var error_fname = false;
+                var error_email = false;
+
+
+                $("#fname").focusout(function(){
+                  check_fname();
+                });
+                $("#exampleInputEmail1").focusout(function() {
+                  check_email();
+                });
+                $("#mobile").focusout(function() {
+                  check_mobile();
+                });
+
+                function check_fname() {
+                  var pattern = /^[a-zA-Z]*$/;
+                  var fname = $("#fname").val();
+                  if (pattern.test(fname) && fname !== '') {
+                      $("#fname_error_message").hide();
+                      $("#fname").css("border-bottom","2px solid #34F458");
+                  } else {
+                      $("#fname_error_message").html("Should contain only Characters");
+                      $('#fname_error_message').css('color','red');
+                      $("#fname_error_message").show();
+                      $("fname").css("border-bottom","2px solid #F90A0A");
+                      error_fname = true;
+                  }
+                }
+
+                function check_email() {
+                  var pattern = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
+                  var email = $("#exampleInputEmail1").val();
+                  if (pattern.test(email) && email !== '') {
+                      $("#email_error_message").hide();
+                      $("#exampleInputEmail1").css("border-bottom","2px solid #34F458");
+                  } else {
+                      $("#email_error_message").html("Invalid Email");
+                      $('#email_error_message').css('color','red');
+                      $("#email_error_message").show();
+                      $("#exampleInputEmail1").css("border-bottom","2px solid #F90A0A");
+                      error_email = true;
+                  }
+                }
+
+                $("#registration_form").submit(function() {
+                  error_fname = false;
+                  error_mobile = false;
+                  error_email = false;
+                
+
+                  check_fname();
+                  check_email();
+                  
+
+                  if (error_fname === false  && error_email === false) {
+                      alert("Registration Successfull");
+                      return true;
+                  } else {
+                      alert("Please Fill the form Correctly");
+                      return false;
+                  }
+
+
+                });
+                });
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
    });
  
-      
-
-         $("#fname_error_message").hide();
-         $("#email_error_message").hide();
-         $("#mobile_error_message").hide();
-       
-
-         var error_fname = false;
-         var error_mobile = false;
-         var error_email = false;
-     
-
-         $("#form_fname").focusout(function(){
-            check_fname();
-         });
-         $("#form_sname").focusout(function() {
-            check_email();
-         });
-         $("#form_email").focusout(function() {
-            check_mobile();
-         });
-       
-
-         function check_fname() {
-            var pattern = /^[a-zA-Z]*$/;
-            var fname = $("#name").val();
-            if (pattern.test(fname) && fname !== '') {
-               $("#fname_error_message").hide();
-               $("#form_fname").css("border-bottom","2px solid #34F458");
-            } else {
-               $("#fname_error_message").html("Should contain only Characters");
-               $("#fname_error_message").show();
-               $("#form_fname").css("border-bottom","2px solid #F90A0A");
-               error_fname = true;
-            }
-         }
-
-         function check_sname() {
-            var pattern = /^[a-zA-Z]*$/;
-            var sname = $("#form_sname").val()
-            if (pattern.test(sname) && sname !== '') {
-               $("#sname_error_message").hide();
-               $("#form_sname").css("border-bottom","2px solid #34F458");
-            } else {
-               $("#sname_error_message").html("Should contain only Characters");
-               $("#sname_error_message").show();
-               $("#form_sname").css("border-bottom","2px solid #F90A0A");
-               error_fname = true;
-            }
-         }
-
-        
-
-         function check_email() {
-            var pattern = /^([\w-\.]+@([\w-]+\.)+[\w-]{2,4})?$/;
-            var email = $("#exampleInputEmail1").val();
-            if (pattern.test(email) && email !== '') {
-               $("#email_error_message").hide();
-               $("#form_email").css("border-bottom","2px solid #34F458");
-            } else {
-               $("#email_error_message").html("Invalid Email");
-               $("#email_error_message").show();
-               $("#form_email").css("border-bottom","2px solid #F90A0A");
-               error_email = true;
-            }
-         }
-
-         $("#registration_form").submit(function() {
-            error_fname = false;
-            error_mobile = false;
-            error_email = false;
-          
-
-            check_fname();
-            check_mobile();
-            check_email();
-           
-
-            if (error_fname === false && error_sname === false && error_email === false) {
-               alert("Registration Successfull");
-               return true;
-            } else {
-               alert("Please Fill the form Correctly");
-               return false;
-            }
-
-
-         });
-      });
+    
  
 
 
