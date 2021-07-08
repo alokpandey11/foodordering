@@ -17,8 +17,10 @@
 
 
 
-.login form{
+#loginm{
     margin-top: 150px;
-    margin-bottom: 50px;
   
+}
+.login form .captcha{
+    margin-top: 0px;
 }

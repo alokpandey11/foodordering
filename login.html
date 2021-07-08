@@ -139,7 +139,7 @@
           </li>
 
           <li class="nav-item">
-            <a class="nav-link " href="about.html">About</a>
+            <a class="nav-link " href=" ">About</a>
           </li>
 
           <li class="nav-item">
@@ -175,7 +175,7 @@
   <main id="main">
 
     <!-- ======= Intro Single ======= -->
-    <section class="login form">
+    <section class="login form" id="loginm">
       <div class="container">
         <div class="row">
           <div class="col-md-12 col-lg-8 inpbox">
@@ -190,12 +190,36 @@
                 <label for="exampleInputPassword1">Password</label>
                 <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
               </div>
-              <div class="form-group form-check">
+              <!-- <div class="form-group form-check">
                 <input type="checkbox" class="form-check-input" id="exampleCheck1">
                 <label class="form-check-label" for="exampleCheck1">Check me out</label>
-              </div>
-              <button type="submit" class="btn btn-primary">Submit</button>
+              </div> -->
+            
+
+<!-- 
+              <button type="submit" class="btn btn-primary">Submit</button> -->
             </form>
+            <form method="post" class="captcha" onsubmit="return submitUserForm();">
+              <div class="g-recaptcha" data-sitekey="6LfHGX4bAAAAAJH80Ftl0PTQL57QyQUTNTI-q1jk" data-callback="verifyCaptcha"></div>
+              <div id="g-recaptcha-error"></div>
+                <input type="submit"  name="submit" value="Submit" />
+              
+            </form>
+              <script src='https://www.google.com/recaptcha/api.js'></script>
+              <script>
+              function submitUserForm() {
+                  var response = grecaptcha.getResponse();
+                  if(response.length == 0) {
+                      document.getElementById('g-recaptcha-error').innerHTML = '<span style="color:red;">This field is required.</span>';
+                      return false;
+                  }
+                  location.href = 'index.html';
+              }
+              
+              function verifyCaptcha() {
+                  document.getElementById('g-recaptcha-error').innerHTML = '';
+              }
+              </script>
          
 
 
@@ -209,6 +233,26 @@
         </div>
       </div>
     </section><!-- End Intro Single-->
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   </main><!-- End #main -->
 
