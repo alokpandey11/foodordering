@@ -1,0 +1,24 @@
+.styled {
+    margin-top: 10px;;
+    border: 0;
+    line-height: 1.8;
+    padding: 0 20px;
+    font-size: 1rem;
+    text-align: center;
+    color: #fff;
+    text-shadow: 1px 1px 1px #000;
+    border-radius: 10px;
+    background-color: rgb(49, 50, 111);
+}
+
+.styled:hover {
+    background-color: rgb(17, 17, 66);
+    border: solid .5px;
+    border-color: rgb(111, 63, 243);
+    transition: ease-in;
+}
+
+.styled:active {
+    box-shadow: inset -2px -2px 3px rgba(255, 255, 255, .6),
+                inset 2px 2px 3px rgba(0, 0, 0, .6);
+}
